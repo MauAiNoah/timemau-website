@@ -1,0 +1,34 @@
+{
+  "reviewDate": "2026-07-26",
+  "testTarget": "local static preview at the repository base path",
+  "finalReviewGate": {
+    "desktop": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 66,
+      "firstContentfulPaintSeconds": 0.2,
+      "largestContentfulPaintSeconds": 0.3,
+      "cumulativeLayoutShift": 0,
+      "totalBlockingTimeMilliseconds": 0
+    },
+    "mobile": {
+      "performance": 100,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 66,
+      "firstContentfulPaintSeconds": 0.8,
+      "largestContentfulPaintSeconds": 1.4,
+      "cumulativeLayoutShift": 0,
+      "totalBlockingTimeMilliseconds": 0
+    },
+    "seoNote": "The score is intentionally reduced only by the review build's noindex directive."
+  },
+  "temporaryPublicReadySeoCheck": {
+    "seo": 100,
+    "crawlable": true,
+    "canonicalValid": true,
+    "hreflangValid": true,
+    "note": "This check temporarily disabled the gate and noindex locally. The final build restored both."
+  }
+}
