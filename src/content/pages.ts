@@ -251,7 +251,7 @@ export const pages: LocalizedPages = {
           title: "A small static site with a small data surface.",
           paragraphs: [
             "The public website uses no first-party analytics, advertising pixels, external fonts, chat widgets, or marketing cookies. It does not sell personal data.",
-            "The early-access form is disabled in this deployment. No form submission is made and no contact details are invented.",
+            "The early-access form is disabled in this deployment. No form submission is made. The official general contact address is contact@timemau.com.",
             "GitHub Pages may keep ordinary infrastructure and security logs. MauAI does not control those platform logs.",
           ],
           tone: "paper",
@@ -317,7 +317,7 @@ export const pages: LocalizedPages = {
           title: "Un site static mic, cu o suprafață mică de date.",
           paragraphs: [
             "Site-ul public nu folosește analytics propriu, pixeli publicitari, fonturi externe, chat sau cookie-uri de marketing. Nu vinde date personale.",
-            "Formularul de acces timpuriu este dezactivat în această versiune. Nu se trimite nimic și nu este inventată nicio adresă de contact.",
+            "Formularul de acces timpuriu este dezactivat în această versiune. Nu se trimite nimic. Adresa oficială pentru contact general este contact@timemau.com.",
             "GitHub Pages poate păstra loguri obișnuite de infrastructură și securitate. MauAI nu controlează acele loguri.",
           ],
           tone: "paper",
@@ -662,6 +662,12 @@ export const pages: LocalizedPages = {
             "No personal data is sold by this website.",
           ],
         },
+        {
+          title: "Contact.",
+          paragraphs: [
+            "Questions about this website can be sent to contact@timemau.com.",
+          ],
+        },
       ],
     },
     ro: {
@@ -699,6 +705,12 @@ export const pages: LocalizedPages = {
           paragraphs: [
             "Site-urile externe aplică propriile politici. Dacă vor fi adăugate un endpoint de acces timpuriu, analytics, descărcări sau alte servicii online, politica trebuie actualizată înainte de activare.",
             "Acest site nu vinde date personale.",
+          ],
+        },
+        {
+          title: "Contact.",
+          paragraphs: [
+            "Întrebările despre acest site pot fi trimise la contact@timemau.com.",
           ],
         },
       ],

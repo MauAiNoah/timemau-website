@@ -1,84 +1,115 @@
-# Later custom-domain transition
+# Protected custom-domain activation
 
-This guide is for a later, separately approved switch from the temporary GitHub Pages project URL to `https://www.timemau.com`.
+The repository is prepared to build the approved password-protected review site
+for:
 
-No GoDaddy, DNS, GitHub Pages domain, CNAME, or certificate change was made during the website implementation.
+`https://www.timemau.com/`
 
-## Gate 1 — approve the temporary Pages site
+No GoDaddy, DNS, GitHub account-level domain verification, or repository custom
+domain setting was changed by the release commit.
 
-Before touching the domain:
+## Repository release state
 
-1. enable **Settings → Pages → Source → GitHub Actions** if required;
-2. confirm the workflow deploys successfully;
-3. review every English and Romanian route at the temporary URL;
-4. verify the password-review decision, early-access state, privacy policy, terms, mobile menu, social card, sitemap, and 404;
-5. retain the previous domain state and DNS export for rollback.
+- Astro `site`: `https://www.timemau.com`.
+- Astro `base`: `/`.
+- GitHub Actions build origin: `https://www.timemau.com`.
+- GitHub Actions build base path: `/`.
+- Password gate: enabled.
+- Clear review password: absent from repository source.
+- `noindex, nofollow`: enabled.
+- `robots.txt`: `Disallow: /`.
+- Sitemap: omitted while the review gate or `noindex` is active.
+- Early-access submissions: disabled.
+- Downloads: unavailable.
 
-## Gate 2 — prepare the root-path build
+The old project-site configuration remains available only as a documented local
+diagnostic override:
 
-For the custom-domain release:
-
-```text
-PUBLIC_SITE_ORIGIN=https://www.timemau.com
-PUBLIC_BASE_PATH=/
+```sh
+PUBLIC_SITE_ORIGIN=https://mauainoah.github.io \
+PUBLIC_BASE_PATH=/timemau-website \
+npm run build
 ```
 
-Rebuild and rerun all validation. Confirm that internal links, assets, canonicals, hreflang, robots, and sitemap use the root path.
+## CNAME file decision
 
-Do not add a `CNAME` file until the custom-domain change is explicitly approved.
+Do **not** add `public/CNAME` for this deployment.
 
-## Gate 3 — configure GitHub first
+This repository publishes through a custom GitHub Actions Pages workflow.
+GitHub's current documentation says a `CNAME` file is ignored and is not
+required for that publishing architecture. The custom domain must instead be
+saved in the repository's Pages settings.
 
-1. In GitHub Pages settings, enter `www.timemau.com` as the custom domain.
-2. Follow GitHub's current domain-verification workflow.
-3. Add only the TXT verification record shown by GitHub for this repository/account.
-4. Wait until GitHub reports the verification state expected by its current documentation.
+References:
 
-Never reuse a TXT value from an old screenshot or this document.
+- [Managing a custom domain for GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+- [Troubleshooting custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages)
 
-## Gate 4 — update GoDaddy carefully
+## Exact next manual step
 
-Before editing:
+Open:
 
-1. export or screenshot the complete current DNS zone;
-2. identify all MX and mail-related TXT/CNAME records;
-3. confirm which services currently use the apex and `www`;
-4. prepare a rollback record list.
+**GitHub Repository → Settings → Pages → Custom domain**
 
-Then:
+Enter:
 
-1. point `www` to the exact CNAME target GitHub currently provides, expected to be the account's `github.io` host;
-2. for the apex domain, consult GitHub's current official Pages documentation and use only the A/AAAA records published there at change time;
-3. preserve all mail MX, SPF, DKIM, DMARC, verification, and unrelated service records;
-4. remove or replace only records that directly conflict with the approved website routing.
+`www.timemau.com`
 
-Do not guess or copy apex IP addresses from an old guide.
+Then save. This is a repository setting; do not open or change GitHub
+account-level domain verification unless it is separately authorized.
 
-## Gate 5 — propagation and HTTPS
+## Manual DNS step after GitHub accepts the domain
 
-After DNS changes:
+Mau performs this step in GoDaddy.
 
-1. wait for DNS propagation;
-2. confirm both apex and `www` resolve as planned;
-3. wait for GitHub's TLS certificate to become available;
-4. enable **Enforce HTTPS**;
-5. verify HTTP-to-HTTPS behavior;
-6. verify the chosen canonical `www` host;
-7. verify apex-to-`www` behavior;
-8. recheck mail delivery and existing non-website DNS services;
-9. rerun route, metadata, social-card, sitemap, robots, accessibility, and performance checks.
+1. Export or screenshot the current DNS zone for rollback.
+2. Preserve MX, SPF, DKIM, DMARC, verification, and unrelated service records.
+3. Configure the `www` CNAME using GitHub's then-current instructions. For this
+   repository owner, the expected target is `mauainoah.github.io` without the
+   repository path.
+4. Configure the apex only if desired, using GitHub's current official A/AAAA,
+   ALIAS, or ANAME guidance.
+5. Do not use wildcard DNS.
+6. Wait for propagation and certificate issuance.
+7. Enable **Enforce HTTPS** when GitHub makes it available.
+8. Verify `www`, the apex redirect decision, all 18 routes, assets, the password
+   gate, `noindex`, and `robots.txt`.
+
+DNS changes can affect routing and email. Do not guess records or delete
+unrelated entries.
+
+## Current protected review state
+
+Once the two manual activation steps are complete:
+
+- `www.timemau.com` is active;
+- password gate remains active;
+- `noindex` remains active;
+- robots remain blocked;
+- sitemap remains excluded;
+- the site remains a review/testing release.
+
+## Future public launch
+
+This requires a separate release decision and validation:
+
+- remove the password gate;
+- remove the password digest only when the gate is removed;
+- remove `noindex`;
+- change robots to allow crawling;
+- restore the sitemap;
+- validate canonical and hreflang URLs;
+- validate indexing in search-engine tooling;
+- keep analytics, trackers, external fonts, submissions, and downloads disabled
+  unless each is separately approved.
 
 ## Rollback
 
-If routing, TLS, email, or canonical behavior is wrong:
+If custom-domain routing, TLS, email, or canonical behavior is wrong:
 
 1. restore the saved DNS records exactly;
-2. remove the custom domain from GitHub Pages only if that is part of the approved rollback;
-3. keep the temporary Pages project URL available for diagnosis;
-4. do not improvise replacement records.
-
-Official references:
-
-- [GitHub Pages custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
-- [GitHub Pages domain verification](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages)
-- [GoDaddy DNS record management](https://www.godaddy.com/help/manage-dns-records-680)
+2. remove the repository custom domain only if that is part of the approved
+   rollback;
+3. retain the protected build and use the former project-site diagnostic
+   configuration;
+4. do not improvise replacement DNS records.

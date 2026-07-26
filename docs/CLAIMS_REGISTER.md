@@ -12,7 +12,7 @@ Status vocabulary:
 |---|---|---|
 | MauAI is in active development. | Current | Displayed in the global announcement and pre-launch pages. |
 | This website is static and uses no first-party analytics, advertising pixels, external fonts, or marketing cookies. | Current | Describes the repository and deployed output only. GitHub may retain infrastructure logs. |
-| The early-access form is being prepared. | Current | Mode is `disabled`; no submission endpoint or invented contact address exists. |
+| The early-access form is being prepared. | Current | Mode is `disabled`; no submission endpoint exists. The approved general contact address is `contact@timemau.com`. |
 | Public downloads are unavailable. | Current | No artifact URLs, versions, dates, checksums, or active download controls exist. |
 | The library is the product; AI is the librarian. | Product principle | Positioning and architecture metaphor, not a feature-availability claim. |
 | MauAI is being built to show the document, passage, and page behind a library-backed response. | Product principle | Traceability is the design contract; correctness of the author is not guaranteed. |

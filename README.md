@@ -6,15 +6,19 @@ The bilingual pre-launch website for **MauAI by Time Mau** and **Noah Library**.
 
 The site is a static Astro build for GitHub Pages. It uses approved Romanian and English copy, approved brand and interface assets, no analytics, no external fonts, no runtime backend, and no public product downloads.
 
-## Current public state
+## Current protected review state
 
 - Product state: pre-launch and active development.
+- Production build origin: `https://www.timemau.com`.
+- Production base path: `/`.
 - English is the root and `x-default` language.
 - Romanian lives under `/ro/`.
 - Early-access transport: `disabled`.
+- Official contact: `contact@timemau.com`.
 - Downloads: unavailable until signed and validated artifacts exist.
 - Review access gate: enabled.
-- Indexing while gated: disabled through page metadata and `robots.txt`.
+- Indexing while gated: disabled through page metadata, `robots.txt`, and sitemap exclusion.
+- Repository custom-domain activation and DNS: manual steps, not performed by this release.
 
 The review gate is client-side because GitHub Pages serves public static files. It keeps casual visitors out of the rendered site and stores an unlock marker only in tab-scoped session storage, but it is **not server-side authentication**. Source files remain retrievable by someone who knows how to inspect a static deployment. Use hosting-level access control for genuinely private material.
 
@@ -31,7 +35,17 @@ npm run validate
 npm run qa
 ```
 
-Local development runs at `/`. The normal production build uses `/timemau-website/`.
+Local development and the custom-domain production build run at `/`.
+
+For temporary project-site diagnostics only:
+
+```sh
+PUBLIC_SITE_ORIGIN=https://mauainoah.github.io \
+PUBLIC_BASE_PATH=/timemau-website \
+npm run build
+```
+
+The deployed `main` workflow always targets `https://www.timemau.com/`.
 
 ## Architecture
 
@@ -105,8 +119,9 @@ The project validates:
 
 - all 18 localized routes and the 404;
 - canonical and bidirectional hreflang metadata;
-- base-path-safe links and assets;
-- page titles, descriptions, Open Graph, sitemap, and robots behavior;
+- root-safe links, assets, icons, scripts, and web manifest;
+- page titles, descriptions, Open Graph, sitemap exclusion, and robots behavior;
+- password rejection, SHA-256 unlock, and same-tab reload behavior;
 - one H1, explicit image dimensions, alt text, duplicate IDs, and labelled fields;
 - disabled early-access and download states;
 - absence of trackers, external fonts, placeholder contact details, and prohibited claims;
@@ -125,11 +140,40 @@ If Pages has not been enabled:
 3. set **Source** to **GitHub Actions**;
 4. rerun the deploy workflow.
 
-The temporary project URL is:
+Until Mau completes the repository custom-domain and DNS steps, the previous
+project URL may remain available:
 
 `https://mauainoah.github.io/timemau-website/`
 
-For the later `www.timemau.com` transition, follow `docs/CUSTOM_DOMAIN_GODADDY.md`. No DNS or GoDaddy change belongs in this repository task.
+The protected release artifact itself now targets:
+
+`https://www.timemau.com/`
+
+No `CNAME` file is committed. GitHub ignores it for a custom GitHub Actions
+Pages workflow; the domain belongs in **Repository → Settings → Pages → Custom
+domain**. Follow `docs/CUSTOM_DOMAIN_GODADDY.md`. No DNS or GoDaddy change was
+made by this repository release.
+
+## Release states
+
+### Current protected custom-domain review
+
+- custom-domain build at `/`;
+- password gate active;
+- `noindex, nofollow`;
+- `robots.txt` blocks all crawling;
+- protected routes omitted from sitemap;
+- early access and downloads disabled.
+
+### Future public launch
+
+Only after separate approval:
+
+- remove the password gate;
+- remove `noindex`;
+- allow crawling;
+- restore the sitemap;
+- validate indexing, canonicals, hreflang, redirects, and HTTPS.
 
 ## Documentation
 

@@ -13,7 +13,7 @@ describe("early-access transport", () => {
     expect(
       resolveEarlyAccessState({
         mode: "mailto",
-        email: "review@timemau.com",
+        email: "contact@timemau.com",
       }),
     ).toMatchObject({ kind: "mailto" });
 

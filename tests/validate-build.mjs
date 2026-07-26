@@ -3,8 +3,14 @@ import { dirname, extname, join, normalize, relative } from "node:path";
 
 const root = new URL("../", import.meta.url).pathname;
 const dist = join(root, "dist");
-const base = "/timemau-website";
-const origin = "https://mauainoah.github.io";
+const origin = (
+  process.env.PUBLIC_SITE_ORIGIN ?? "https://www.timemau.com"
+).replace(/\/+$/, "");
+const configuredBase = process.env.PUBLIC_BASE_PATH ?? "/";
+const base =
+  !configuredBase || configuredBase === "/"
+    ? ""
+    : `/${configuredBase.replace(/^\/+|\/+$/g, "")}`;
 
 const routePairs = [
   ["/", "/ro/"],
@@ -83,6 +89,27 @@ for (const file of htmlFiles) {
     failures.push(`${routeLabel}: review-gated build must be noindex`);
   }
 
+  if (
+    !/data-access-gate/.test(html) ||
+    !/data-digest="[a-f0-9]{64}"/.test(html) ||
+    !/type="password"/.test(html) ||
+    !/\/scripts\/access-gate\.js/.test(html)
+  ) {
+    failures.push(`${routeLabel}: protected review gate is incomplete`);
+  }
+
+  if (/\/timemau-website\//.test(html)) {
+    failures.push(`${routeLabel}: stale project-site base path remains`);
+  }
+
+  if (!/rel="manifest" href="\/site\.webmanifest"/.test(html)) {
+    failures.push(`${routeLabel}: root web manifest link is missing`);
+  }
+
+  if (!/href="mailto:contact@timemau\.com"/.test(html)) {
+    failures.push(`${routeLabel}: official contact address is missing`);
+  }
+
   const ids = extract(html, /\sid="([^"]+)"/g);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
   if (duplicates.length) {
@@ -115,7 +142,7 @@ for (const file of htmlFiles) {
       continue;
     }
 
-    if (link.startsWith("/") && !link.startsWith(`${base}/`)) {
+    if (base && link.startsWith("/") && !link.startsWith(`${base}/`)) {
       failures.push(`${routeLabel}: root-only URL bypasses base path: ${link}`);
       continue;
     }
@@ -174,18 +201,29 @@ for (const [english, romanian] of routePairs) {
 }
 
 const robots = await readFile(join(dist, "robots.txt"), "utf8");
-if (!robots.includes("Disallow: /") || !robots.includes(`${origin}${base}/sitemap-index.xml`)) {
-  failures.push("robots.txt does not protect the review build or link the sitemap");
+if (
+  !robots.includes("Disallow: /") ||
+  robots.includes("Allow: /") ||
+  robots.includes("Sitemap:")
+) {
+  failures.push("robots.txt does not fully block the protected review build");
 }
 
-const sitemap = await readFile(join(dist, "sitemap-0.xml"), "utf8");
-for (const [english, romanian] of routePairs) {
-  if (!sitemap.includes(`${origin}${base}${english}`)) {
-    failures.push(`Sitemap missing ${english}`);
-  }
-  if (!sitemap.includes(`${origin}${base}${romanian}`)) {
-    failures.push(`Sitemap missing ${romanian}`);
-  }
+const distEntries = await readdir(dist);
+if (distEntries.some((entry) => entry.startsWith("sitemap"))) {
+  failures.push("Protected review build must not publish a sitemap");
+}
+
+const manifest = JSON.parse(
+  await readFile(join(dist, "site.webmanifest"), "utf8"),
+);
+if (
+  manifest.start_url !== `${base}/` ||
+  manifest.scope !== `${base}/` ||
+  manifest.icons?.length !== 2 ||
+  manifest.icons?.some((icon) => !icon.src.startsWith(`${base}/assets/icons/`))
+) {
+  failures.push("Web manifest is not rooted at the configured base path");
 }
 
 const earlyAccess = await readFile(routeFile("/early-access/"), "utf8");
@@ -207,5 +245,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Static validation passed: ${htmlFiles.length} HTML files, 18 localized routes, 404, metadata, assets, base path, noindex gate, sitemap, robots, and disabled product states.`,
+  `Static validation passed: ${htmlFiles.length} HTML files, 18 localized routes, 404, custom-domain metadata, root links/assets/manifest, password gate, noindex, robots, sitemap exclusion, and disabled product states.`,
 );

@@ -1441,10 +1441,21 @@ blockquote {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 24px;
   padding-top: 22px;
   border-top: 1px solid rgb(255 255 255 / 0.12);
   font-size: 0.76rem;
+}
+
+.footer-bottom a {
+  color: rgb(255 255 255 / 0.78);
+  text-decoration-color: rgb(255 255 255 / 0.32);
+  text-underline-offset: 4px;
+}
+
+.footer-bottom a:hover {
+  color: var(--teal-bright);
 }
 
 .access-gate {

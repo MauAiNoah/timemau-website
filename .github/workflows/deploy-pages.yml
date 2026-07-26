@@ -43,13 +43,18 @@ jobs:
       - name: Build project-site output
         run: npm run build
         env:
-          PUBLIC_SITE_ORIGIN: https://mauainoah.github.io
-          PUBLIC_BASE_PATH: /timemau-website
-          PUBLIC_NOINDEX: "false"
+          PUBLIC_SITE_ORIGIN: https://www.timemau.com
+          PUBLIC_BASE_PATH: /
+          PUBLIC_NOINDEX: "true"
           PUBLIC_ACCESS_GATE_ENABLED: "true"
 
       - name: Validate static output
         run: npm run validate
+        env:
+          PUBLIC_SITE_ORIGIN: https://www.timemau.com
+          PUBLIC_BASE_PATH: /
+          PUBLIC_NOINDEX: "true"
+          PUBLIC_ACCESS_GATE_ENABLED: "true"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6

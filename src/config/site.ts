@@ -29,6 +29,7 @@ export interface SiteConfig {
   readonly publisher: "Time Mau";
   readonly product: "MauAI";
   readonly knowledgeProduct: "Noah Library";
+  readonly contactEmail: "contact@timemau.com";
 }
 
 const normalizeBase = (base: string): string => {
@@ -37,7 +38,7 @@ const normalizeBase = (base: string): string => {
 };
 
 const origin = (
-  import.meta.env.PUBLIC_SITE_ORIGIN ?? "https://mauainoah.github.io"
+  import.meta.env.PUBLIC_SITE_ORIGIN ?? "https://www.timemau.com"
 ).replace(/\/+$/, "");
 const basePath = normalizeBase(import.meta.env.BASE_URL);
 const mode = import.meta.env.PUBLIC_EARLY_ACCESS_MODE ?? "disabled";
@@ -78,6 +79,7 @@ export const siteConfig: SiteConfig = {
   publisher: "Time Mau",
   product: "MauAI",
   knowledgeProduct: "Noah Library",
+  contactEmail: "contact@timemau.com",
 };
 
 export const withBase = (path = "/"): string => {

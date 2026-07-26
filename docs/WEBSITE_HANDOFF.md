@@ -6,12 +6,15 @@ Review date: 26 July 2026
 
 Implementation and local acceptance gates: **ready**.
 
-Remote state: **pushed to `main` and deployed successfully with GitHub Actions**.
+Protected custom-domain release state: **prepared for `main` deployment**.
 
-- Public review URL: `https://mauainoah.github.io/timemau-website/`
-- HTTPS: enforced.
+- Production origin: `https://www.timemau.com`
+- Production base path: `/`
+- Password gate: enabled.
+- Indexing: blocked.
+- Official contact: `contact@timemau.com`.
 - Pages source: GitHub Actions.
-- Custom domain: not configured.
+- Repository custom domain: pending Mau's manual Pages setting.
 - GoDaddy and DNS: unchanged.
 
 ## Sources used
@@ -88,6 +91,7 @@ Every localized pair has:
 - `x-default`;
 - localized Open Graph text and image;
 - equivalent language-switch destination.
+- root-relative assets, scripts, icons, and manifest.
 
 ## Components
 
@@ -114,7 +118,7 @@ Every localized pair has:
 
 The approved machine-readable homepage copy is used unchanged. No major approved headline was paraphrased.
 
-New inner-page and legal sentences were written only where the launch kit required a complete public explanation but did not provide a full page-length deck. They reuse approved claims, qualifications, product status, and tone. No legal entity, jurisdiction, postal address, contact email, pricing, release date, availability, testimonial, user metric, or system requirement was invented.
+New inner-page and legal sentences were written only where the launch kit required a complete public explanation but did not provide a full page-length deck. They reuse approved claims, qualifications, product status, and tone. The user supplied `contact@timemau.com` as the official website address. No legal entity, jurisdiction, postal address, pricing, release date, availability, testimonial, user metric, or system requirement was invented.
 
 ## Asset result
 
@@ -141,6 +145,7 @@ Behavior verified:
 - a reload in the same tab remains unlocked;
 - the gate is localized;
 - the gated build is `noindex` and robots-disallowed.
+- protected routes are excluded from the sitemap.
 
 Limitation: GitHub Pages cannot enforce private server-side authentication. The gate prevents normal rendered access but does not make public static files confidential.
 
@@ -183,7 +188,7 @@ Lighthouse accessibility: 100 desktop, 100 mobile.
 - canonical and bidirectional hreflang;
 - `x-default`;
 - localized Open Graph and Twitter cards;
-- sitemap;
+- review-mode sitemap exclusion;
 - robots;
 - WebSite/Brand data;
 - BreadcrumbList on inner pages;
@@ -205,22 +210,20 @@ The site has no third-party render blockers, autoplay, external fonts, analytics
 
 ## Exact local validation
 
-- `npm run typecheck` — 40 Astro/TypeScript files, zero errors/warnings/hints.
-- `npm run lint` — claims/integration/path lint across public source and workflow files.
-- `npm test` — 4/4 Vitest tests.
-- `npm run build` — 19 pages, static output, sitemap generated.
-- `npm run validate` — 18 localized routes, 404, metadata, links, assets, base path, sitemap, robots, noindex gate, and disabled states.
-- Browser checks — all required viewport widths, language equivalence, password failure/success, mobile menu click/keyboard/Escape, FAQ keyboard disclosure, console errors, and accessibility smoke.
+- `npm run typecheck` — 43 Astro/TypeScript files, zero errors/warnings/hints.
+- `npm run lint` — 49 public source and workflow files passed claims/integration/path lint.
+- `npm test` — 7/7 Vitest tests, including password rejection, digest unlock, same-tab reload, and separate-tab lock.
+- `npm run build` — 19 HTML pages plus root `robots.txt` and `site.webmanifest`; no review sitemap generated.
+- `npm run validate` — 18 localized routes, 404, custom-domain metadata, root links/assets/manifest, password gate, noindex, robots, sitemap exclusion, and disabled product states.
+- Browser checks — incorrect password rejected; correct password unlocked; same-tab reload remained unlocked; canonical resolved to `https://www.timemau.com/`; contact, manifest, root paths, focus, and console state passed.
 - Lighthouse — desktop/mobile plus a temporary public-ready SEO configuration.
 - `npm audit` — zero known vulnerabilities after dependency installation.
+- Clear-password scan — the supplied review password is absent from source and build output; only its 64-character SHA-256 digest is present.
+- Secret and local-path scans — no recognized credentials, private keys, local hostnames, or `/Users/mau` paths.
+- `git diff --check` — passed.
 
-Release-gate verification:
-
-- local and remote `main` matched after push;
-- repository secret/private-path scan passed;
-- GitHub Pages build and deploy jobs passed;
-- the public review URL returned HTTP 200;
-- the deployed HTML included the review gate, `noindex`, and the expected title.
+Final release-gate results are recorded after the bounded custom-domain commit,
+push, and GitHub Actions run.
 
 ## Screenshots
 
@@ -232,13 +235,15 @@ See:
 
 ## Deployment
 
-Temporary URL:
+Protected release target:
 
-`https://mauainoah.github.io/timemau-website/`
+`https://www.timemau.com/`
 
 Repository Pages source: **GitHub Actions**.
 
-The later custom-domain switch is documented in `docs/CUSTOM_DOMAIN_GODADDY.md`.
+No `CNAME` file is used because GitHub ignores it for custom Actions Pages
+publishing. Mau must set `www.timemau.com` in the repository Pages settings and
+then configure DNS manually. See `docs/CUSTOM_DOMAIN_GODADDY.md`.
 
 ## Limitations
 
@@ -248,12 +253,14 @@ The later custom-domain switch is documented in `docs/CUSTOM_DOMAIN_GODADDY.md`.
 - Downloads are unavailable.
 - macOS, Windows, 16 GB, Noah Core, and companion access remain qualified targets/plans.
 - GitHub Pages does not apply the portable `_headers` file; the document-level CSP remains active, and stronger response headers require a host that supports them.
+- The custom-domain hostname cannot serve the build until the repository Pages
+  setting and DNS are completed manually.
 
 ## Change boundaries
 
 - Zero GoDaddy changes.
 - Zero DNS changes.
-- Zero custom-domain configuration.
+- Custom-domain build configuration only; zero repository-domain setting changes.
 - Zero MauAI application changes.
 - Zero Noah changes.
 - Zero harness/evaluator changes.

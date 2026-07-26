@@ -1,5 +1,5 @@
 ---
-import { assetUrl, withBase } from "@/config/site";
+import { assetUrl, siteConfig, withBase } from "@/config/site";
 import type { Locale } from "@/config/site";
 import { homeCopy } from "@/content/pages";
 import { routes } from "@/i18n/routes";
@@ -92,6 +92,7 @@ const groups =
   </div>
   <div class="container footer-bottom">
     <span>© 2026 Time Mau</span>
+    <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
     <span>
       {locale === "ro"
         ? "Site informativ de pre-lansare"

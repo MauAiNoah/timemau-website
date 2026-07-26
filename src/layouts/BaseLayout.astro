@@ -101,6 +101,7 @@ const contentSecurityPolicy = [
       sizes="180x180"
       href={assetUrl("/assets/icons/apple-touch-icon.png")}
     />
+    <link rel="manifest" href={assetUrl("/site.webmanifest")} />
     {
       jsonLd && (
         <script type="application/ld+json" is:inline set:html={jsonLd} />
