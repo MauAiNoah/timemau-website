@@ -6,7 +6,13 @@ Review date: 26 July 2026
 
 Implementation and local acceptance gates: **ready**.
 
-Remote push and GitHub Pages state: pending the final repository gate at the time this document was first written. The final task response and repository Actions history record the authoritative push/deployment result.
+Remote state: **pushed to `main` and deployed successfully with GitHub Actions**.
+
+- Public review URL: `https://mauainoah.github.io/timemau-website/`
+- HTTPS: enforced.
+- Pages source: GitHub Actions.
+- Custom domain: not configured.
+- GoDaddy and DNS: unchanged.
 
 ## Sources used
 
@@ -208,7 +214,13 @@ The site has no third-party render blockers, autoplay, external fonts, analytics
 - Lighthouse — desktop/mobile plus a temporary public-ready SEO configuration.
 - `npm audit` — zero known vulnerabilities after dependency installation.
 
-Final git hygiene, secret scan, remote push, and Actions verification are recorded at the release gate.
+Release-gate verification:
+
+- local and remote `main` matched after push;
+- repository secret/private-path scan passed;
+- GitHub Pages build and deploy jobs passed;
+- the public review URL returned HTTP 200;
+- the deployed HTML included the review gate, `noindex`, and the expected title.
 
 ## Screenshots
 
@@ -224,16 +236,13 @@ Temporary URL:
 
 `https://mauainoah.github.io/timemau-website/`
 
-If required, enable:
-
-**Repository → Settings → Pages → Source → GitHub Actions**
+Repository Pages source: **GitHub Actions**.
 
 The later custom-domain switch is documented in `docs/CUSTOM_DOMAIN_GODADDY.md`.
 
 ## Limitations
 
 - Client-side gate is not server-side confidentiality.
-- GitHub Pages may need one-time manual activation.
 - Captain Mau has no clean approved standalone production asset.
 - Early-access collection is disabled.
 - Downloads are unavailable.
