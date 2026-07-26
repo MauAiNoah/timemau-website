@@ -1,0 +1,71 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 24 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install pinned dependencies
+        run: npm ci
+
+      - name: Typecheck Astro and TypeScript
+        run: npm run typecheck
+
+      - name: Lint public content and configuration
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build project-site output
+        run: npm run build
+        env:
+          PUBLIC_SITE_ORIGIN: https://mauainoah.github.io
+          PUBLIC_BASE_PATH: /timemau-website
+          PUBLIC_NOINDEX: "false"
+          PUBLIC_ACCESS_GATE_ENABLED: "true"
+
+      - name: Validate static output
+        run: npm run validate
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
