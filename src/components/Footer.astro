@@ -1,0 +1,101 @@
+---
+import { assetUrl, withBase } from "@/config/site";
+import type { Locale } from "@/config/site";
+import { homeCopy } from "@/content/pages";
+import { routes } from "@/i18n/routes";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = homeCopy[locale];
+const groups =
+  locale === "ro"
+    ? [
+        {
+          title: "Produs",
+          links: [
+            ["Bibliotecă", routes.library.ro],
+            ["Confidențialitate", routes.privacy.ro],
+            ["Descărcare", routes.download.ro],
+          ],
+        },
+        {
+          title: "Time Mau",
+          links: [
+            ["Despre", routes.about.ro],
+            ["Întrebări", routes.faq.ro],
+            ["Acces timpuriu", routes.earlyAccess.ro],
+          ],
+        },
+        {
+          title: "Legal",
+          links: [
+            ["Politica de confidențialitate", routes.privacyPolicy.ro],
+            ["Termeni", routes.terms.ro],
+          ],
+        },
+      ]
+    : [
+        {
+          title: "Product",
+          links: [
+            ["Library", routes.library.en],
+            ["Privacy", routes.privacy.en],
+            ["Download", routes.download.en],
+          ],
+        },
+        {
+          title: "Time Mau",
+          links: [
+            ["About", routes.about.en],
+            ["FAQ", routes.faq.en],
+            ["Early access", routes.earlyAccess.en],
+          ],
+        },
+        {
+          title: "Legal",
+          links: [
+            ["Privacy policy", routes.privacyPolicy.en],
+            ["Terms", routes.terms.en],
+          ],
+        },
+      ];
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img
+        src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+        width="256"
+        height="256"
+        alt=""
+      />
+      <div>
+        <strong>{copy.footer.brand}</strong>
+        <p>{copy.footer.tagline}</p>
+        <span>{copy.footer.status}</span>
+      </div>
+    </div>
+    {
+      groups.map((group) => (
+        <div class="footer-group">
+          <strong>{group.title}</strong>
+          {group.links.map(([label, href]) => (
+            <a href={withBase(href)}>{label}</a>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Time Mau</span>
+    <span>
+      {locale === "ro"
+        ? "Site informativ de pre-lansare"
+        : "Pre-release informational website"}
+    </span>
+  </div>
+</footer>

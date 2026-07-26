@@ -1,0 +1,49 @@
+---
+import FaqList from "@/components/FaqList.astro";
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Locale } from "@/config/site";
+import { faqPage, homeCopy } from "@/content/pages";
+import { breadcrumbStructuredData } from "@/utils/seo";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const content = faqPage[locale];
+const faqData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: homeCopy[locale].faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  locale={locale}
+  page="faq"
+  title={content.metaTitle}
+  description={content.metaDescription}
+  structuredData={[
+    breadcrumbStructuredData(locale, "faq", content.title),
+    faqData,
+  ]}
+>
+  <PageHero
+    eyebrow={content.eyebrow}
+    title={content.title}
+    intro={content.intro}
+  />
+  <section class="content-section">
+    <div class="container reading-width">
+      <FaqList locale={locale} />
+    </div>
+  </section>
+</BaseLayout>

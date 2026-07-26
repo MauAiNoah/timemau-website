@@ -1,0 +1,35 @@
+---
+import InnerPage from "@/components/InnerPage.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Locale } from "@/config/site";
+import { pages } from "@/content/pages";
+import type { PageKey } from "@/i18n/routes";
+import { breadcrumbStructuredData } from "@/utils/seo";
+
+interface Props {
+  locale: Locale;
+  page: Exclude<PageKey, "home" | "faq">;
+}
+
+const { locale, page } = Astro.props;
+const content = pages[page][locale];
+---
+
+<BaseLayout
+  locale={locale}
+  page={page}
+  title={content.metaTitle}
+  description={content.metaDescription}
+  structuredData={breadcrumbStructuredData(locale, page, content.title)}
+>
+  <InnerPage locale={locale} content={content} />
+  {
+    page === "earlyAccess" && (
+      <section class="page-cta">
+        <div class="container reading-width">
+          <slot name="early-access" />
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

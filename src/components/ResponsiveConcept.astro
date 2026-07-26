@@ -1,0 +1,58 @@
+---
+import { assetUrl } from "@/config/site";
+import type { Locale } from "@/config/site";
+
+interface Props {
+  kind: "desktop" | "companion";
+  locale: Locale;
+  eager?: boolean;
+}
+
+const { kind, locale, eager = false } = Astro.props;
+const alt =
+  kind === "desktop"
+    ? locale === "ro"
+      ? "Concept desktop MauAI cu dialog, pasaje sursă, citări și starea modelului local."
+      : "MauAI desktop concept showing chat, source passages, citations, and a local model status panel."
+    : locale === "ro"
+      ? "Concept MauAI pe telefon și laptop, cu o conexiune locală și o pagină viitoare de descărcare."
+      : "MauAI concept across phone and laptop, with local connection and a future download page.";
+---
+
+<picture class:list={["concept-picture", `concept-${kind}`]}>
+  <source
+    type="image/avif"
+    srcset={[
+      `${assetUrl(`/assets/interface/${kind}-640.avif`)} 640w`,
+      `${assetUrl(`/assets/interface/${kind}-960.avif`)} 960w`,
+      `${assetUrl(`/assets/interface/${kind}-1280.avif`)} 1280w`,
+    ].join(", ")}
+    sizes={
+      kind === "desktop"
+        ? "(min-width: 960px) 55vw, 94vw"
+        : "(min-width: 960px) 52vw, 94vw"
+    }
+  />
+  <source
+    type="image/webp"
+    srcset={[
+      `${assetUrl(`/assets/interface/${kind}-640.webp`)} 640w`,
+      `${assetUrl(`/assets/interface/${kind}-960.webp`)} 960w`,
+      `${assetUrl(`/assets/interface/${kind}-1280.webp`)} 1280w`,
+    ].join(", ")}
+    sizes={
+      kind === "desktop"
+        ? "(min-width: 960px) 55vw, 94vw"
+        : "(min-width: 960px) 52vw, 94vw"
+    }
+  />
+  <img
+    src={assetUrl(`/assets/interface/${kind}-1280.avif`)}
+    width="1280"
+    height="801"
+    alt={alt}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    decoding="async"
+  />
+</picture>

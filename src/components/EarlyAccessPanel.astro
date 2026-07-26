@@ -1,0 +1,144 @@
+---
+import { siteConfig, withBase } from "@/config/site";
+import type { Locale } from "@/config/site";
+import { routes } from "@/i18n/routes";
+import { resolveEarlyAccessState } from "@/utils/early-access";
+
+interface Props {
+  locale: Locale;
+  compact?: boolean;
+}
+
+const { locale, compact = false } = Astro.props;
+const state = resolveEarlyAccessState(siteConfig.earlyAccess);
+const labels =
+  locale === "ro"
+    ? {
+        disabledTitle: "Formularul este în pregătire.",
+        disabledBody:
+          "Nu colectăm încă solicitări. Pagina va fi actualizată numai după configurarea și verificarea unui canal real.",
+        learn: "Vezi ce presupune testarea",
+        mailto: "Scrie pentru acces timpuriu",
+        name: "Nume (opțional)",
+        email: "E-mail",
+        os: "Sistem de operare",
+        ram: "Memorie RAM",
+        use: "Utilizare principală",
+        language: "Limba preferată",
+        note: "Notă (opțional)",
+        consent:
+          "Sunt de acord ca aceste date să fie folosite pentru acces timpuriu MauAI și actualizări despre produs.",
+        submit: "Trimite solicitarea",
+      }
+    : {
+        disabledTitle: "The form is being prepared.",
+        disabledBody:
+          "We are not collecting applications yet. This page will change only after a real submission channel is configured and verified.",
+        learn: "See what testing involves",
+        mailto: "Write about early access",
+        name: "Name (optional)",
+        email: "Email",
+        os: "Operating system",
+        ram: "RAM",
+        use: "Primary use",
+        language: "Preferred language",
+        note: "Note (optional)",
+        consent:
+          "I agree that these details may be used for MauAI early access and product updates.",
+        submit: "Send application",
+      };
+---
+
+<div class:list={["early-access-panel", compact && "compact"]}>
+  {
+    state.kind === "disabled" && (
+      <div class="disabled-form-state" role="status">
+        <span class="state-icon" aria-hidden="true">⌁</span>
+        <div>
+          <h3>{labels.disabledTitle}</h3>
+          <p>{labels.disabledBody}</p>
+          <a href={withBase(routes.earlyAccess[locale])}>{labels.learn}</a>
+        </div>
+      </div>
+    )
+  }
+  {
+    state.kind === "mailto" && (
+      <a class="button" href={state.href}>
+        {labels.mailto}
+      </a>
+    )
+  }
+  {
+    state.kind === "endpoint" && (
+      <form class="early-access-form" method="post" action={state.action}>
+        <div class="honeypot" aria-hidden="true">
+          <label for="company-site">Company site</label>
+          <input
+            id="company-site"
+            name="company_site"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+        <label>
+          {labels.email}
+          <input name="email" type="email" autocomplete="email" required />
+        </label>
+        <label>
+          {labels.name}
+          <input name="name" type="text" autocomplete="name" />
+        </label>
+        <label>
+          {labels.os}
+          <select name="os" required>
+            <option value="">—</option>
+            <option value="macos">macOS</option>
+            <option value="windows">Windows</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>
+          {labels.ram}
+          <select name="ram" required>
+            <option value="">—</option>
+            <option>16 GB</option>
+            <option>32 GB</option>
+            <option>64 GB</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          {labels.use}
+          <select name="use_case" required>
+            <option value="">—</option>
+            <option value="study">Study</option>
+            <option value="work">Work</option>
+            <option value="personal-library">Personal library</option>
+            <option value="research">Research</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>
+          {labels.language}
+          <select name="language" required>
+            <option value="">—</option>
+            <option value="ro">Română</option>
+            <option value="en">English</option>
+            <option value="both">Both / Ambele</option>
+          </select>
+        </label>
+        <label>
+          {labels.note}
+          <textarea name="note" maxlength="500" rows="5"></textarea>
+        </label>
+        <label class="consent">
+          <input name="consent" type="checkbox" value="yes" required />
+          <span>{labels.consent}</span>
+        </label>
+        <button class="button" type="submit">{labels.submit}</button>
+      </form>
+    )
+  }
+</div>

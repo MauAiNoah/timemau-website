@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 220" role="img" aria-labelledby="title">
+<title id="title">MauAI Noah Library</title>
+<defs>
+  <linearGradient id="sail2" x1="0" x2="1"><stop offset="0" stop-color="#00BFC4"/><stop offset="1" stop-color="#078C94"/></linearGradient>
+</defs>
+<g transform="translate(14 12) scale(.72)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M128 36v97" stroke="#0B132B" stroke-width="9"/>
+  <path d="M128 38c18-7 33-4 46 5-14 1-28 5-46 14z" fill="#0B132B" stroke="#0B132B" stroke-width="3"/>
+  <path d="M118 54C84 79 67 107 67 137c19-12 36-15 51-14z" fill="#0B132B" stroke="#0B132B" stroke-width="5"/>
+  <path d="M137 58c22 23 35 48 38 76-13-8-26-12-38-12z" fill="url(#sail2)" stroke="#0B132B" stroke-width="5"/>
+  <path d="M34 145c34 4 65 15 94 36 29-21 60-32 94-36-11 31-42 55-94 65-52-10-83-34-94-65z" fill="#FFFDFC" stroke="#0B132B" stroke-width="9"/>
+  <path d="M47 155c28 7 55 19 81 38 26-19 53-31 81-38" stroke="#0B132B" stroke-width="6"/>
+  <path d="M65 223c19 7 107 7 126 0" stroke="#00BFC4" stroke-width="7"/>
+  <path d="M82 237c17 5 75 5 92 0" stroke="#00BFC4" stroke-width="5"/>
+</g>
+<line x1="225" y1="38" x2="225" y2="180" stroke="#DDE4E9" stroke-width="3"/>
+<text x="260" y="93" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="72" font-weight="650" fill="#0B132B">Mau<tspan fill="#00BFC4">AI</tspan></text>
+<text x="263" y="140" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="32" letter-spacing="1" fill="#102D44">Noah Library</text>
+<text x="263" y="180" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="650" letter-spacing="3" fill="#0B132B">KNOWLEDGE NAVIGATES. <tspan fill="#078C94">WE GET YOU THERE.</tspan></text>
+</svg>

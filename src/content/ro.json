@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "siteTitle": "MauAI — Biblioteca ta locală, ghidată de AI",
+    "siteDescription": "MauAI este o bibliotecă local-first în dezvoltare. Adaugi cărți și documente, întrebi natural și deschizi sursa din spatele răspunsului.",
+    "ogTitle": "MauAI — Biblioteca ta. Vie, privată, a ta.",
+    "ogDescription": "O bibliotecă personală care poate căuta, explica și arăta sursa — pe calculatorul tău."
+  },
+  "nav": {
+    "product": "Produs",
+    "library": "Bibliotecă",
+    "privacy": "Confidențialitate",
+    "story": "Poveste",
+    "faq": "Întrebări",
+    "earlyAccess": "Acces timpuriu"
+  },
+  "announcement": "MauAI este în dezvoltare. Primele testări închise vor începe după validarea instalării, bibliotecii și citărilor.",
+  "hero": {
+    "eyebrow": "O bibliotecă locală, ghidată de AI",
+    "title": "Biblioteca ta. Vie, privată, a ta.",
+    "body": "MauAI este construită să caute în cărțile și documentele tale, să lege ideile importante și să-ți arate exact de unde vine fiecare răspuns — pe calculatorul tău, chiar și fără internet după instalare.",
+    "primaryCta": "Înscrie-te pentru acces timpuriu",
+    "secondaryCta": "Vezi cum funcționează",
+    "note": "În dezvoltare pentru macOS și Windows. Ținta de 16 GB RAM este în curs de validare.",
+    "chips": [
+      "Local-first",
+      "Surse vizibile",
+      "Fără cloud implicit",
+      "În dezvoltare"
+    ]
+  },
+  "positioning": {
+    "title": "Nu încă un AI. O bibliotecă ce poate vorbi.",
+    "body": "Modelele se schimbă. Cunoașterea rămâne. În MAUAI, biblioteca este în față; AI-ul are un rol mai modest și mai util: caută, ordonează, explică și se oprește când sursele nu ajung.",
+    "quote": "Nu întrebi AI-ul ce știe. Întrebi biblioteca ce conține."
+  },
+  "instrument": {
+    "title": "Vioara este biblioteca. AI-ul este arcușul.",
+    "body": "Biblioteca poartă cunoașterea. AI-ul o pune în mișcare: găsește pasajul potrivit, îl leagă de alte surse și îl explică pe limba ta. Fără bibliotecă, modelul este doar un povestitor. Cu surse, devine navigator."
+  },
+  "how": {
+    "title": "Întrebi simplu. Biblioteca răspunde cu paginile deschise.",
+    "steps": [
+      {
+        "title": "1. Adaugi cărțile și documentele",
+        "body": "Prima versiune este proiectată pentru PDF, TXT și Markdown. Documentele sunt indexate local, cu identitate și proveniență."
+      },
+      {
+        "title": "2. Întrebi în limbaj natural",
+        "body": "Nu trebuie să înveți comenzi sau acronime. Întrebi cum ai întreba un bibliotecar atent."
+      },
+      {
+        "title": "3. Deschizi sursa",
+        "body": "Când răspunsul este bazat pe bibliotecă, vezi documentul, pasajul și pagina. MauAI arată traseul, nu doar concluzia."
+      },
+      {
+        "title": "4. Continui căutarea, dacă merită",
+        "body": "Dacă primul lot de pasaje nu este suficient, poți cere o căutare mai adâncă. Fără completări din memorie prezentate drept dovadă."
+      }
+    ]
+  },
+  "contract": {
+    "title": "Un contract clar cu utilizatorul",
+    "cards": [
+      {
+        "label": "Bazat pe surse",
+        "title": "Asta spune biblioteca",
+        "body": "Răspunsul vine cu pasajele și paginile folosite. MAUAI garantează trasabilitatea la sursă, nu adevărul absolut al autorului."
+      },
+      {
+        "label": "Dovezi insuficiente",
+        "title": "Bibliotecarul se oprește",
+        "body": "Dacă documentele nu susțin un răspuns, sistemul spune asta și poate continua căutarea doar cu acordul tău."
+      },
+      {
+        "label": "Conversație liberă",
+        "title": "Fără garanție de corectitudine",
+        "body": "Răspunsurile generate fără surse sunt etichetate separat și nu sunt prezentate ca informație din bibliotecă."
+      }
+    ]
+  },
+  "libraries": {
+    "title": "Două biblioteci. Nicio confuzie.",
+    "my": {
+      "title": "Biblioteca mea",
+      "body": "Cărțile, notițele și documentele tale. Private, controlate de tine și separate de biblioteca distribuită cu produsul."
+    },
+    "noah": {
+      "title": "Noah Library",
+      "body": "Un pachet curatat, versionat și read-only, construit numai din surse care pot fi distribuite legal. Primul Noah Core Seed va fi mic și verificat, nu umflat pentru marketing."
+    }
+  },
+  "connections": {
+    "title": "Când rafturile încep să vorbească între ele.",
+    "body": "Biologia întâlnește chimia. Fizica întâlnește matematica. Istoria întâlnește economia. MAUAI este construită să arate ce spune fiecare sursă, unde există o legătură explicită și unde începe inferența.",
+    "note": "Cunoașterea nu stă pe raft. Intră în horă."
+  },
+  "privacy": {
+    "title": "Al tău, pe calculatorul tău.",
+    "body": "Local-first nu este un decor de marketing, ci o limită de arhitectură. Nucleul este proiectat să funcționeze pe dispozitivul utilizatorului, fără fallback cloud tăcut.",
+    "points": [
+      {
+        "title": "Local implicit",
+        "body": "Conversațiile și biblioteca personală rămân pe calculator în fluxul local."
+      },
+      {
+        "title": "Online doar la alegere",
+        "body": "Conectoarele online vor fi opționale, vizibile și separate de răspunsurile locale."
+      },
+      {
+        "title": "Fără telemetrie implicită",
+        "body": "Produsul este proiectat fără urmărire obligatorie. Raportarea problemelor pornește local și se exportă cu acordul utilizatorului."
+      },
+      {
+        "title": "Modelul se schimbă. Biblioteca rămâne.",
+        "body": "Greutățile AI pot fi înlocuite. Documentele, metadatele și istoricul tău rămân activele importante."
+      }
+    ]
+  },
+  "companion": {
+    "title": "Calculatorul este motorul. Telefonul este fereastra.",
+    "body": "Accesul de pe telefon și tabletă este planificat ca un companion securizat: interfața vine în browser, iar procesarea și biblioteca rămân pe calculator. Această funcție nu face parte din nucleul primei versiuni.",
+    "badge": "Planificat pentru v1.x"
+  },
+  "captain": {
+    "title": "Căpitanul Mau nu știe tot. Știe unde să caute.",
+    "body": "Un ghid calm prin biblioteca ta. Când găsește dovezi, le arată. Când nu, spune asta. Uneori mai dă o tură prin rafturi — dar nu inventează portul."
+  },
+  "story": {
+    "title": "A început cu o plantă din grădină.",
+    "body": "MauAI n-a pornit ca un pitch. A pornit ca o întrebare simplă: poate un AI mic, local, să privească o plantă bolnavă, să caute în cărți și să răspundă fără să pretindă că știe tot? Din întrebarea asta s-a născut o idee mai mare: o bibliotecă personală care poate vorbi, explica și arăta sursa.",
+    "signature": "Construită de Mau, cu o echipă mică de AI-uri și cu ideea încăpățânată că software-ul bun trebuie să rămână în mâna omului care îl folosește."
+  },
+  "earlyAccess": {
+    "title": "Ajută-ne să construim bibliotecarul în care ai avea încredere.",
+    "body": "Primele testări vor urmări lucrurile care contează: instalarea, căutarea în bibliotecă, citările, viteza pe 16 GB și raportarea clară a erorilor. Fără promisiuni lustruite înainte de dovezi.",
+    "cta": "Vreau acces timpuriu",
+    "privacy": "Datele trimise prin formular vor fi folosite numai pentru accesul timpuriu și actualizările MAUAI. Nicio listă vândută, nicio reclamă terță."
+  },
+  "faq": [
+    {
+      "q": "MauAI este disponibilă acum?",
+      "a": "Nu încă. Produsul comercial este în dezvoltare activă. Site-ul trebuie să afișeze clar starea de pre-lansare și să nu ofere butoane de descărcare false."
+    },
+    {
+      "q": "Este doar un alt chatbot?",
+      "a": "Nu aceasta este ideea. MAUAI pune biblioteca în față și AI-ul în rol de bibliotecar: caută, explică și arată sursa."
+    },
+    {
+      "q": "Funcționează offline?",
+      "a": "Nucleul este proiectat să funcționeze offline după instalare și descărcarea pachetelor necesare. Afirmația va fi folosită comercial numai după testele de soak și instalare."
+    },
+    {
+      "q": "Documentele mele pleacă în cloud?",
+      "a": "În fluxul local planificat, nu. Funcțiile online vor fi opționale și vizibile. Niciun fallback cloud tăcut."
+    },
+    {
+      "q": "Va exista pe Mac și Windows?",
+      "a": "Ambele sunt ținte comerciale. Lansarea simultană depinde de testele reale pe hardware Windows și Mac."
+    },
+    {
+      "q": "Va merge pe 16 GB RAM?",
+      "a": "16 GB este ținta provizorie a produsului. Nu este încă o garanție de marketing; modelele și fluxurile sunt testate pe hardware real."
+    },
+    {
+      "q": "Răspunsurile sunt garantat adevărate?",
+      "a": "Nicio carte și niciun AI nu oferă adevăr absolut. MAUAI este construită să garanteze trasabilitatea: să arate ce sursă și ce pasaj susțin răspunsul."
+    },
+    {
+      "q": "Ce se întâmplă când nu există răspuns în documente?",
+      "a": "Bibliotecarul se abține sau îți propune să continue căutarea. Nu completează golul din memorie și nu îl prezintă ca dovadă."
+    },
+    {
+      "q": "Care va fi prețul?",
+      "a": "Prețul nu este stabilit. Direcția preferată este o licență pentru versiunea majoră cumpărată, fără abonament obligatoriu, dar decizia finală va urma testele de cost și suport."
+    },
+    {
+      "q": "Îl voi putea folosi de pe telefon?",
+      "a": "Un companion securizat în browser este planificat după nucleul desktop. Calculatorul rămâne motorul, telefonul devine interfața."
+    }
+  ],
+  "download": {
+    "title": "Descărcarea vine după dovadă, nu înainte.",
+    "body": "Când buildurile semnate pentru macOS și Windows sunt validate, vor apărea aici. Până atunci, site-ul arată starea reală a produsului.",
+    "mac": "macOS — în dezvoltare",
+    "windows": "Windows — în dezvoltare"
+  },
+  "footer": {
+    "brand": "MauAI by Time Mau",
+    "tagline": "Knowledge navigates. We get you there.",
+    "status": "Pre-launch · Local-first · Library-first"
+  }
+}

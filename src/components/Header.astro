@@ -1,0 +1,121 @@
+---
+import { assetUrl, withBase } from "@/config/site";
+import type { Locale } from "@/config/site";
+import { homeCopy } from "@/content/pages";
+import { oppositeLocale, routes } from "@/i18n/routes";
+import type { PageKey } from "@/i18n/routes";
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+
+const { locale, page } = Astro.props;
+const copy = homeCopy[locale];
+const otherLocale = oppositeLocale(locale);
+const nav =
+  locale === "ro"
+    ? [
+        { label: "Acasă", key: "home" },
+        { label: copy.nav.library, key: "library" },
+        { label: copy.nav.privacy, key: "privacy" },
+        { label: "Despre", key: "about" },
+        { label: copy.nav.faq, key: "faq" },
+      ]
+    : [
+        { label: "Home", key: "home" },
+        { label: copy.nav.library, key: "library" },
+        { label: copy.nav.privacy, key: "privacy" },
+        { label: "About", key: "about" },
+        { label: copy.nav.faq, key: "faq" },
+      ];
+---
+
+<div class="announcement">
+  <div class="container">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span>{copy.announcement}</span>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a
+      class="brand-link"
+      href={withBase(routes.home[locale])}
+      aria-label={
+        locale === "ro"
+          ? "MauAI Noah Library — Acasă"
+          : "MauAI Noah Library — Home"
+      }
+    >
+      <img
+        src={assetUrl("/assets/brand/mauai-noah-horizontal.svg")}
+        width="820"
+        height="220"
+        alt="MauAI Noah Library"
+      />
+    </a>
+    <nav class="desktop-nav" aria-label={locale === "ro" ? "Principală" : "Main"}>
+      {
+        nav.map((item) => (
+          <a
+            href={withBase(routes[item.key as PageKey][locale])}
+            aria-current={page === item.key ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="header-actions">
+      <a
+        class="language-link"
+        href={withBase(routes[page][otherLocale])}
+        lang={otherLocale}
+        hreflang={otherLocale}
+        aria-label={
+          locale === "ro"
+            ? "Switch to English"
+            : "Schimbă limba în română"
+        }
+      >
+        {otherLocale === "ro" ? "RO" : "EN"}
+      </a>
+      <a class="button button-small" href={withBase(routes.earlyAccess[locale])}>
+        {copy.nav.earlyAccess}
+      </a>
+      <details class="mobile-menu">
+        <summary aria-label={locale === "ro" ? "Deschide meniul" : "Open menu"}>
+          <span></span><span></span><span></span>
+        </summary>
+        <nav aria-label={locale === "ro" ? "Meniu mobil" : "Mobile menu"}>
+          {
+            nav.map((item) => (
+              <a
+                href={withBase(routes[item.key as PageKey][locale])}
+                aria-current={page === item.key ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a href={withBase(routes.earlyAccess[locale])}>
+            {copy.nav.earlyAccess}
+          </a>
+          <a
+            href={withBase(routes[page][otherLocale])}
+            lang={otherLocale}
+            hreflang={otherLocale}
+          >
+            {otherLocale === "ro" ? "Română" : "English"}
+          </a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+<script
+  is:inline
+  src={assetUrl("/scripts/details-keyboard.js")}
+  defer
+></script>

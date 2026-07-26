@@ -1,0 +1,65 @@
+---
+import { assetUrl, siteConfig } from "@/config/site";
+import type { Locale } from "@/config/site";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy =
+  locale === "ro"
+    ? {
+        eyebrow: "Previzualizare privată",
+        title: "Biblioteca este pregătită pentru review.",
+        body: "Introdu parola pentru a deschide site-ul TimeMau / MauAI.",
+        label: "Parolă",
+        action: "Deschide site-ul",
+        note: "Acces temporar pentru evaluarea versiunii de pre-lansare.",
+      }
+    : {
+        eyebrow: "Private preview",
+        title: "The library is ready for review.",
+        body: "Enter the password to open the TimeMau / MauAI website.",
+        label: "Password",
+        action: "Open the website",
+        note: "Temporary access for reviewing the pre-launch release.",
+      };
+---
+
+<div
+  class="access-gate"
+  data-access-gate
+  data-digest={siteConfig.accessGate.digest}
+  data-locale={locale}
+>
+  <div class="gate-card">
+    <img
+      src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+      width="96"
+      height="96"
+      alt=""
+    />
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <p class="gate-title">{copy.title}</p>
+    <p>{copy.body}</p>
+    <form novalidate>
+      <label for="review-password">{copy.label}</label>
+      <div class="gate-field">
+        <input
+          id="review-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          autofocus
+        />
+        <button type="submit">{copy.action}</button>
+      </div>
+      <p class="form-error" data-access-error aria-live="polite"></p>
+    </form>
+    <small>{copy.note}</small>
+  </div>
+</div>
+
+<script is:inline src={assetUrl("/scripts/access-gate.js")} defer></script>

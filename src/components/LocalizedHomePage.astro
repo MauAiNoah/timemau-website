@@ -1,0 +1,24 @@
+---
+import HomePage from "@/components/HomePage.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Locale } from "@/config/site";
+import { homeCopy } from "@/content/pages";
+import { websiteStructuredData } from "@/utils/seo";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = homeCopy[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  page="home"
+  title={copy.meta.siteTitle}
+  description={copy.meta.siteDescription}
+  structuredData={websiteStructuredData(locale)}
+>
+  <HomePage locale={locale} />
+</BaseLayout>

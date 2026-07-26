@@ -1,0 +1,43 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { assetUrl, withBase } from "@/config/site";
+import { routes } from "@/i18n/routes";
+---
+
+<BaseLayout
+  locale="en"
+  page="home"
+  title="Page not found — MauAI"
+  description="This page drifted off course. The library is still here."
+>
+  <section class="page-hero error-page">
+    <div class="container reading-width">
+      <img
+        src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+        width="256"
+        height="256"
+        alt=""
+      />
+      <p class="eyebrow">404 · Off course</p>
+      <h1>This page drifted off course. The library is still here.</h1>
+      <p class="page-intro" lang="ro">
+        Pagina asta a ieșit puțin din curs. Biblioteca este tot aici.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href={withBase(routes.home.en)}>Go home</a>
+        <a class="text-link" href={withBase(routes.library.en)}>
+          Open the Library page →
+        </a>
+        <a
+          class="language-link"
+          href={withBase(routes.home.ro)}
+          lang="ro"
+          hreflang="ro"
+          aria-label="Deschide pagina principală în română"
+        >
+          RO
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

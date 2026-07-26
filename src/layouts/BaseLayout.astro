@@ -1,0 +1,129 @@
+---
+import AccessGate from "@/components/AccessGate.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { createHash } from "node:crypto";
+import { absoluteUrl, assetUrl, siteConfig } from "@/config/site";
+import type { Locale } from "@/config/site";
+import { routes } from "@/i18n/routes";
+import type { PageKey } from "@/i18n/routes";
+import "@/styles/global.css";
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  title: string;
+  description: string;
+  structuredData?: object | readonly object[];
+}
+
+const { locale, page, title, description, structuredData } = Astro.props;
+const canonical = absoluteUrl(routes[page][locale]);
+const englishUrl = absoluteUrl(routes[page].en);
+const romanianUrl = absoluteUrl(routes[page].ro);
+const socialImage = absoluteUrl(
+  locale === "ro"
+    ? "/assets/social/og-mauai-ro.png"
+    : "/assets/social/og-mauai-en.png",
+);
+const shouldNoindex = siteConfig.noindex || siteConfig.accessGate.enabled;
+const jsonLd = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, "\\u003c")
+  : "";
+const jsonLdHash = jsonLd
+  ? createHash("sha256").update(jsonLd).digest("base64")
+  : "";
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "img-src 'self' data:",
+  "style-src 'self'",
+  `script-src 'self'${jsonLdHash ? ` 'sha256-${jsonLdHash}'` : ""}`,
+  "connect-src 'self'",
+  "font-src 'self'",
+  "object-src 'none'",
+  "base-uri 'none'",
+  "form-action 'self'",
+  "frame-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content={contentSecurityPolicy}
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="robots"
+      content={shouldNoindex ? "noindex, nofollow" : "index, follow"}
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="ro" href={romanianUrl} />
+    <link rel="alternate" hreflang="x-default" href={englishUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MauAI by Time Mau" />
+    <meta property="og:locale" content={locale === "ro" ? "ro_RO" : "en_US"} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={
+        locale === "ro"
+          ? "MauAI — Biblioteca ta. Vie, privată, a ta."
+          : "MauAI — Your library. Alive, private, yours."
+      }
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="theme-color" content="#F7F4ED" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={assetUrl("/assets/icons/favicon-32.png")}
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href={assetUrl("/assets/icons/apple-touch-icon.png")}
+    />
+    {
+      jsonLd && (
+        <script type="application/ld+json" is:inline set:html={jsonLd} />
+      )
+    }
+  </head>
+  <body>
+    {
+      siteConfig.accessGate.enabled && <AccessGate locale={locale} />
+    }
+    <div
+      class="site-shell"
+      data-site-shell
+      hidden={siteConfig.accessGate.enabled}
+    >
+      <a class="skip-link" href="#main-content">
+        {locale === "ro" ? "Sari la conținut" : "Skip to content"}
+      </a>
+      <Header locale={locale} page={page} />
+      <main id="main-content" tabindex="-1">
+        <slot />
+      </main>
+      <Footer locale={locale} />
+    </div>
+  </body>
+</html>

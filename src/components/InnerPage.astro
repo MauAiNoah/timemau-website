@@ -1,0 +1,84 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import { withBase } from "@/config/site";
+import type { Locale } from "@/config/site";
+import type { PageContent } from "@/content/pages";
+import { routes } from "@/i18n/routes";
+
+interface Props {
+  locale: Locale;
+  content: PageContent;
+}
+
+const { locale, content } = Astro.props;
+---
+
+<PageHero
+  eyebrow={content.eyebrow}
+  title={content.title}
+  intro={content.intro}
+  note={content.note}
+/>
+
+{
+  content.sections.map((section, index) => (
+    <section
+      class:list={[
+        "content-section",
+        section.tone && `section-${section.tone}`,
+      ]}
+    >
+      <div class="container">
+        <div class="section-heading">
+          {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+          <h2>{section.title}</h2>
+          {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        {section.items && (
+          <div
+            class:list={[
+              "content-grid",
+              section.items.length === 2 && "grid-two",
+              section.items.length === 4 && "grid-four",
+            ]}
+          >
+            {section.items.map((item, itemIndex) => (
+              <article class="content-card">
+                <span class="card-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}.
+                  {String(itemIndex + 1).padStart(2, "0")}
+                </span>
+                {item.badge && <span class="badge">{item.badge}</span>}
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        )}
+        {section.quote && <blockquote>{section.quote}</blockquote>}
+      </div>
+    </section>
+  ))
+}
+
+{
+  content.cta && (
+    <section class="page-cta">
+      <div class="container cta-panel">
+        <div>
+          <p class="eyebrow">
+            {locale === "ro" ? "Continuă explorarea" : "Keep exploring"}
+          </p>
+          <h2>{content.cta.title}</h2>
+          <p>{content.cta.body}</p>
+        </div>
+        <a
+          class="button"
+          href={withBase(routes[content.cta.target][locale])}
+        >
+          {content.cta.label}
+        </a>
+      </div>
+    </section>
+  )
+}

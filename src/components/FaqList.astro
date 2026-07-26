@@ -1,0 +1,23 @@
+---
+import type { Locale } from "@/config/site";
+import { homeCopy } from "@/content/pages";
+
+interface Props {
+  locale: Locale;
+  limit?: number;
+}
+
+const { locale, limit } = Astro.props;
+const items = limit ? homeCopy[locale].faq.slice(0, limit) : homeCopy[locale].faq;
+---
+
+<div class="faq-list">
+  {
+    items.map((item) => (
+      <details>
+        <summary>{item.q}</summary>
+        <p>{item.a}</p>
+      </details>
+    ))
+  }
+</div>

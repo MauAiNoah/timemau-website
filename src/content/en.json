@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "siteTitle": "MauAI — Your local-first AI library with visible sources",
+    "siteDescription": "MauAI is a local-first knowledge library in development. Add books and documents, ask naturally, and open the source behind the answer.",
+    "ogTitle": "MauAI — Your library. Alive, private, yours.",
+    "ogDescription": "A personal library that can search, explain, and show the source — on your own computer."
+  },
+  "nav": {
+    "product": "Product",
+    "library": "Library",
+    "privacy": "Privacy",
+    "story": "Story",
+    "faq": "FAQ",
+    "earlyAccess": "Early access"
+  },
+  "announcement": "MauAI is in active development. Closed testing will begin after installation, Library, and citation flows are validated.",
+  "hero": {
+    "eyebrow": "A local-first library, guided by AI",
+    "title": "Your library. Alive, private, yours.",
+    "body": "MauAI is being built to search your books and documents, connect the ideas that matter, and show exactly where each answer came from — on your own computer, even offline after setup.",
+    "primaryCta": "Join early access",
+    "secondaryCta": "See how it works",
+    "note": "In development for macOS and Windows. The 16 GB RAM target is still being validated.",
+    "chips": [
+      "Local-first",
+      "Visible sources",
+      "No silent cloud",
+      "In development"
+    ]
+  },
+  "positioning": {
+    "title": "Not another AI. A library that can speak.",
+    "body": "Models change. Knowledge remains. In MAUAI, the library comes first. AI has a narrower, more useful job: search, organize, explain, and stop when the sources are not enough.",
+    "quote": "You don't ask the AI what it remembers. You ask your library what it contains."
+  },
+  "instrument": {
+    "title": "The library is the instrument. AI is the bow.",
+    "body": "The library carries the knowledge. AI brings it into motion: it finds the right passage, connects it to other sources, and explains it in your language. Without a library, the model is only a storyteller. With sources, it becomes a navigator."
+  },
+  "how": {
+    "title": "Ask naturally. Your library answers with the pages open.",
+    "steps": [
+      {
+        "title": "1. Add books and documents",
+        "body": "The first version is designed for PDF, TXT, and Markdown. Documents are indexed locally with identity and provenance."
+      },
+      {
+        "title": "2. Ask in your own words",
+        "body": "No commands or acronyms to learn. Ask the way you would ask a careful librarian."
+      },
+      {
+        "title": "3. Open the source",
+        "body": "When an answer is library-backed, you see the document, passage, and page. MAUAI shows the path, not only the conclusion."
+      },
+      {
+        "title": "4. Search deeper when it is worth it",
+        "body": "If the first set of passages is not enough, you can request a deeper search. No model memory presented as evidence."
+      }
+    ]
+  },
+  "contract": {
+    "title": "A clear contract with the user",
+    "cards": [
+      {
+        "label": "Source-backed",
+        "title": "This is what the library says",
+        "body": "The answer includes the passages and pages it used. MAUAI aims to guarantee traceability to the source, not the absolute truth of the author."
+      },
+      {
+        "label": "Not enough evidence",
+        "title": "The librarian stops",
+        "body": "When the documents do not support an answer, the system says so and can search deeper only with your consent."
+      },
+      {
+        "label": "Free conversation",
+        "title": "No accuracy guarantee",
+        "body": "Responses generated without sources are clearly labelled and are never presented as information from your library."
+      }
+    ]
+  },
+  "libraries": {
+    "title": "Two libraries. No confusion.",
+    "my": {
+      "title": "My Library",
+      "body": "Your books, notes, and documents. Private, user-controlled, and separate from the knowledge pack distributed with the product."
+    },
+    "noah": {
+      "title": "Noah Library",
+      "body": "A curated, versioned, read-only knowledge pack built only from material that can be distributed legally. The first Noah Core Seed will be small and verified, not inflated for marketing."
+    }
+  },
+  "connections": {
+    "title": "When the shelves start talking to one another.",
+    "body": "Biology meets chemistry. Physics meets mathematics. History meets economics. MAUAI is being built to show what each source says, where a connection is explicit, and where inference begins.",
+    "note": "Knowledge does not stay on the shelf. It joins the conversation."
+  },
+  "privacy": {
+    "title": "Yours, on your computer.",
+    "body": "Local-first is not a marketing decoration. It is an architectural boundary. The core is designed to run on the user's device without a silent cloud fallback.",
+    "points": [
+      {
+        "title": "Local by default",
+        "body": "In the planned local flow, conversations and personal-library data stay on the computer."
+      },
+      {
+        "title": "Online only by choice",
+        "body": "Future online connectors will be optional, visible, and separate from local answers."
+      },
+      {
+        "title": "No mandatory telemetry",
+        "body": "The product is designed without compulsory tracking. Problem reports begin locally and are exported only with user consent."
+      },
+      {
+        "title": "Models change. Your library remains.",
+        "body": "AI weights can be replaced. Your documents, metadata, and history are the assets that matter."
+      }
+    ]
+  },
+  "companion": {
+    "title": "Your computer is the engine. Your phone is the window.",
+    "body": "Phone and tablet access is planned as a secure companion: the interface opens in a browser while processing and the library remain on the computer. This is not part of the first core release.",
+    "badge": "Planned for v1.x"
+  },
+  "captain": {
+    "title": "Captain Mau does not know everything. He knows where to look.",
+    "body": "A calm guide through your library. When he finds evidence, he shows it. When he does not, he says so. Sometimes he takes another lap through the shelves — but he does not invent the port."
+  },
+  "story": {
+    "title": "It started with a plant in a garden.",
+    "body": "MauAI did not begin as a startup pitch. It began with a simple question: could a small local AI look at a sick plant, search trusted books, and answer without pretending it knew everything? That question grew into a larger idea: a personal library that can speak, explain, and show the source.",
+    "signature": "Built by Mau, with a small crew of AIs and a stubborn belief that good software should remain in the hands of the person who uses it."
+  },
+  "earlyAccess": {
+    "title": "Help us build the librarian you would trust.",
+    "body": "The first tests will focus on what matters: installation, Library search, citations, 16 GB performance, and clear problem reporting. No polished promises before evidence.",
+    "cta": "I want early access",
+    "privacy": "Information submitted through the form will be used only for MAUAI early access and product updates. No list sales. No third-party advertising."
+  },
+  "faq": [
+    {
+      "q": "Is MauAI available now?",
+      "a": "Not yet. The commercial product is in active development. The website must clearly show its pre-launch status and must not present fake download buttons."
+    },
+    {
+      "q": "Is this just another chatbot?",
+      "a": "That is not the product idea. MAUAI puts the library first and gives AI the role of librarian: search, explain, and show the source."
+    },
+    {
+      "q": "Does it work offline?",
+      "a": "The core is designed to work offline after setup and required packs are downloaded. This will be marketed only after installation and soak tests pass."
+    },
+    {
+      "q": "Do my documents go to the cloud?",
+      "a": "Not in the planned local flow. Online features will be optional and visible. No silent cloud fallback."
+    },
+    {
+      "q": "Will it support Mac and Windows?",
+      "a": "Both are commercial targets. A simultaneous launch depends on real hardware validation on macOS and Windows."
+    },
+    {
+      "q": "Will it run on 16 GB of RAM?",
+      "a": "16 GB is the provisional product target. It is not yet a marketing guarantee; models and workflows are being tested on real hardware."
+    },
+    {
+      "q": "Are the answers guaranteed to be true?",
+      "a": "No book and no AI offers absolute truth. MAUAI is being built for traceability: it should show which source and passage support an answer."
+    },
+    {
+      "q": "What happens when the documents do not contain the answer?",
+      "a": "The librarian abstains or offers to search deeper. It does not fill the gap from model memory and present that as evidence."
+    },
+    {
+      "q": "How much will it cost?",
+      "a": "Pricing is not final. The preferred direction is a perpetual licence for the purchased major version, without a mandatory subscription, subject to real support and distribution costs."
+    },
+    {
+      "q": "Can I use it from my phone?",
+      "a": "A secure browser companion is planned after the desktop core. The computer remains the engine; the phone becomes the interface."
+    }
+  ],
+  "download": {
+    "title": "Downloads come after proof, not before.",
+    "body": "Signed macOS and Windows builds will appear here after validation. Until then, the website shows the product's real state.",
+    "mac": "macOS — in development",
+    "windows": "Windows — in development"
+  },
+  "footer": {
+    "brand": "MauAI by Time Mau",
+    "tagline": "Knowledge navigates. We get you there.",
+    "status": "Pre-launch · Local-first · Library-first"
+  }
+}

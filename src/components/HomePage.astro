@@ -1,0 +1,331 @@
+---
+import EarlyAccessPanel from "@/components/EarlyAccessPanel.astro";
+import FaqList from "@/components/FaqList.astro";
+import ResponsiveConcept from "@/components/ResponsiveConcept.astro";
+import { assetUrl, withBase } from "@/config/site";
+import type { Locale } from "@/config/site";
+import { homeCopy } from "@/content/pages";
+import { routes } from "@/i18n/routes";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = homeCopy[locale];
+const labels =
+  locale === "ro"
+    ? {
+        concept: "Concept de produs · Unele funcții ale bibliotecii sunt încă în dezvoltare.",
+        process: "Cum funcționează",
+        contract: "Limita de încredere",
+        my: "A ta",
+        noah: "Curatată",
+        principle: "Principiu local-first",
+        planned: "Funcție planificată",
+        captain: "Căpitanul Mau",
+        origin: "De unde a pornit",
+        early: "Acces timpuriu",
+        faq: "Întrebări frecvente",
+        allFaq: "Vezi toate întrebările",
+        libraryCta: "Explorează biblioteca",
+        privacyCta: "Citește principiile",
+      }
+    : {
+        concept: "Product concept · Some Library functions are still in development.",
+        process: "How it works",
+        contract: "The trust boundary",
+        my: "Yours",
+        noah: "Curated",
+        principle: "Local-first principle",
+        planned: "Planned feature",
+        captain: "Captain Mau",
+        origin: "Where it started",
+        early: "Early access",
+        faq: "Frequently asked questions",
+        allFaq: "See all questions",
+        libraryCta: "Explore the library",
+        privacyCta: "Read the principles",
+      };
+---
+
+<section class="hero" id="product">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{copy.hero.eyebrow}</p>
+      <h1>{copy.hero.title}</h1>
+      <p class="hero-body">{copy.hero.body}</p>
+      <div class="hero-actions">
+        <a class="button" href={withBase(routes.earlyAccess[locale])}>
+          {copy.hero.primaryCta}
+        </a>
+        <a class="text-link" href="#how-it-works">
+          {copy.hero.secondaryCta}<span aria-hidden="true"> ↓</span>
+        </a>
+      </div>
+      <p class="hero-note">{copy.hero.note}</p>
+      <ul class="trust-chips" aria-label={locale === "ro" ? "Principii" : "Principles"}>
+        {copy.hero.chips.map((chip) => <li>{chip}</li>)}
+      </ul>
+    </div>
+    <figure class="hero-visual">
+      <div class="visual-halo" aria-hidden="true"></div>
+      <ResponsiveConcept kind="desktop" locale={locale} eager />
+      <figcaption>{labels.concept}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="positioning content-section">
+  <div class="container editorial-split">
+    <div>
+      <p class="section-number" aria-hidden="true">01</p>
+      <h2>{copy.positioning.title}</h2>
+    </div>
+    <div>
+      <p class="large-copy">{copy.positioning.body}</p>
+      <blockquote>{copy.positioning.quote}</blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="instrument-section">
+  <div class="container instrument-grid">
+    <div class="instrument-visual" aria-hidden="true">
+      <span class="instrument-label">
+        {locale === "ro" ? "BIBLIOTECA" : "THE LIBRARY"}
+      </span>
+      <div class="instrument-line"></div>
+      <img
+        src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+        width="256"
+        height="256"
+        alt=""
+      />
+      <div class="instrument-line short"></div>
+      <span class="instrument-label">AI</span>
+    </div>
+    <div>
+      <p class="eyebrow">
+        {locale === "ro" ? "Metafora centrală" : "The central metaphor"}
+      </p>
+      <h2>{copy.instrument.title}</h2>
+      <p>{copy.instrument.body}</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" id="how-it-works">
+  <div class="container">
+    <div class="section-heading centered">
+      <p class="eyebrow">{labels.process}</p>
+      <h2>{copy.how.title}</h2>
+    </div>
+    <ol class="steps-grid">
+      {
+        copy.how.steps.map((step, index) => (
+          <li>
+            <span class="step-number">{String(index + 1).padStart(2, "0")}</span>
+            <h3>{step.title.replace(/^\d+\.\s*/, "")}</h3>
+            <p>{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<section class="content-section section-paper">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">{labels.contract}</p>
+      <h2>{copy.contract.title}</h2>
+    </div>
+    <div class="contract-grid">
+      {
+        copy.contract.cards.map((card, index) => (
+          <article class:list={["contract-card", `contract-${index + 1}`]}>
+            <span class="state-mark" aria-hidden="true">
+              {index === 0 ? "✓" : index === 1 ? "—" : "○"}
+            </span>
+            <span class="badge">{card.label}</span>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="content-section libraries-section">
+  <div class="container">
+    <div class="section-heading centered">
+      <p class="eyebrow">
+        {locale === "ro" ? "Modelul celor două biblioteci" : "The two-library model"}
+      </p>
+      <h2>{copy.libraries.title}</h2>
+    </div>
+    <div class="library-cards">
+      <article>
+        <span class="badge">{labels.my}</span>
+        <div class="library-icon" aria-hidden="true">⌂</div>
+        <h3>{copy.libraries.my.title}</h3>
+        <p>{copy.libraries.my.body}</p>
+      </article>
+      <div class="library-bridge" aria-hidden="true">
+        <span></span><img
+          src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+          width="256"
+          height="256"
+          alt=""
+        /><span></span>
+      </div>
+      <article>
+        <span class="badge">{labels.noah}</span>
+        <div class="library-icon" aria-hidden="true">≡</div>
+        <h3>{copy.libraries.noah.title}</h3>
+        <p>{copy.libraries.noah.body}</p>
+      </article>
+    </div>
+    <div class="centered-action">
+      <a class="text-link" href={withBase(routes.library[locale])}>
+        {labels.libraryCta} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="connections-section">
+  <div class="container connections-grid">
+    <div>
+      <p class="eyebrow">
+        {locale === "ro" ? "Legături între domenii" : "Across the shelves"}
+      </p>
+      <h2>{copy.connections.title}</h2>
+      <p>{copy.connections.body}</p>
+    </div>
+    <div class="connection-map" aria-hidden="true">
+      <span>Biology</span><i></i><span>Chemistry</span>
+      <i></i><strong>{locale === "ro" ? "SURSE" : "SOURCES"}</strong><i></i>
+      <span>History</span><i></i><span>Economics</span>
+    </div>
+    <p class="connection-note">{copy.connections.note}</p>
+  </div>
+</section>
+
+<section class="content-section privacy-section">
+  <div class="container privacy-grid">
+    <div class="privacy-intro">
+      <p class="eyebrow">{labels.principle}</p>
+      <h2>{copy.privacy.title}</h2>
+      <p>{copy.privacy.body}</p>
+      <a class="text-link" href={withBase(routes.privacy[locale])}>
+        {labels.privacyCta} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="privacy-points">
+      {
+        copy.privacy.points.map((point, index) => (
+          <article>
+            <span aria-hidden="true">{index === 0 ? "⌂" : index === 1 ? "↗" : index === 2 ? "◌" : "≋"}</span>
+            <div>
+              <h3>{point.title}</h3>
+              <p>{point.body}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="companion-section">
+  <div class="container companion-grid">
+    <figure>
+      <ResponsiveConcept kind="companion" locale={locale} />
+      <figcaption>{labels.concept}</figcaption>
+    </figure>
+    <div>
+      <span class="planned-badge">{labels.planned} · {copy.companion.badge}</span>
+      <h2>{copy.companion.title}</h2>
+      <p>{copy.companion.body}</p>
+    </div>
+  </div>
+</section>
+
+<section class="captain-section">
+  <div class="container captain-card">
+    <img
+      src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+      width="256"
+      height="256"
+      alt=""
+    />
+    <div>
+      <p class="eyebrow">{labels.captain}</p>
+      <h2>{copy.captain.title}</h2>
+      <p>{copy.captain.body}</p>
+    </div>
+  </div>
+</section>
+
+<section class="story-section" id="story">
+  <div class="container story-grid">
+    <div class="story-mark" aria-hidden="true">
+      <span>✦</span><i></i><span>⌁</span>
+    </div>
+    <div>
+      <p class="eyebrow">{labels.origin}</p>
+      <h2>{copy.story.title}</h2>
+      <p>{copy.story.body}</p>
+      <p class="signature">{copy.story.signature}</p>
+    </div>
+  </div>
+</section>
+
+<section class="early-section">
+  <div class="container early-grid">
+    <div>
+      <p class="eyebrow">{labels.early}</p>
+      <h2>{copy.earlyAccess.title}</h2>
+      <p>{copy.earlyAccess.body}</p>
+      <p class="privacy-note">{copy.earlyAccess.privacy}</p>
+    </div>
+    <EarlyAccessPanel locale={locale} compact />
+  </div>
+</section>
+
+<section class="content-section faq-preview">
+  <div class="container faq-grid">
+    <div>
+      <p class="eyebrow">{labels.faq}</p>
+      <h2>
+        {locale === "ro"
+          ? "Întrebări fără răspunsuri lustruite."
+          : "Questions without polished evasions."}
+      </h2>
+      <a class="text-link" href={withBase(routes.faq[locale])}>
+        {labels.allFaq} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+    <FaqList locale={locale} limit={6} />
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container final-cta-inner">
+    <img
+      src={assetUrl("/assets/brand/mauai-noah-mark.svg")}
+      width="256"
+      height="256"
+      alt=""
+    />
+    <p class="eyebrow">MauAI · Noah Library</p>
+    <h2>{copy.positioning.title}</h2>
+    <p>{copy.positioning.quote}</p>
+    <a class="button" href={withBase(routes.earlyAccess[locale])}>
+      {copy.hero.primaryCta}
+    </a>
+  </div>
+</section>
