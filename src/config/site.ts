@@ -48,7 +48,7 @@ const accessGateEnabled =
   import.meta.env.PUBLIC_ACCESS_GATE_ENABLED !== "false";
 const accessGateDigest =
   import.meta.env.PUBLIC_ACCESS_GATE_DIGEST?.trim() ??
-  "c399f4e5b16161a5bb4d97a50f244d5cb206467dfbb7c46e9c02724443434e4c";
+  "61f65a8ff97b6f56bd8996dfe57df78d408247a4eabdce32668f453df36eb69f";
 
 if (mode === "endpoint" && (!endpoint || !endpoint.startsWith("https://"))) {
   throw new Error("Endpoint early-access mode requires an HTTPS endpoint.");
